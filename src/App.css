@@ -1,38 +1,140 @@
 .App {
   text-align: center;
+  background-color: rgb(26, 26, 36);
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+  overflow: hidden;
+  box-sizing: border-box;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.titlesContainer{  
+  padding-top: 20px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.titleBox{
+  height: 140px;
+  width: 140px;
+  background-color: gray;
+  text-align: center;  
+  display: inline-block;  
+  cursor: pointer;  
+  margin: 10px;
+  vertical-align: top;
+  position: relative;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.titleBox:hover{
+  background-color: rgb(155, 151, 151);
+  box-shadow: 0 0 10px gold;
+}
+.titleBoxInner{
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 100%;
+  width: 100%;
+}
+.edit{
+  height: 90vh;
+  width: 90vw;
+  margin: 5vh 5vw;
+  background-color: gray;
+  position: relative;
+}
+.edit input{
+  width: 96%;
+  margin: 5px auto;  
+  border: none;
+  box-sizing: border-box;
+  outline: none;
+  height: 30px;
+  padding: 5px;
+}
+.edit textarea{
+  min-width: 96%;
+  max-width: 96%;
+  height: calc(97% - 75px);
+  margin: 5px auto;  
+  border: none;
+  box-sizing: border-box;
+  outline: none;
+  min-height: 200px;
+  padding: 5px;
+}
+.buttonBox{
+  display: flex;
+  height: 30px;
+  line-height: 30px;
+  width: 96%;
+  margin: 5px auto;
+  position: absolute;
+  bottom: 5px;
+  left: 2%;
+}
+.button{
+  flex: 1;
+  background-color: rgb(107, 107, 107);
+  cursor: pointer;
+}
+.button:hover{
+  background-color: rgb(142, 142, 142);
+  box-shadow: 0 0 10px gold;
 }
 
-.App-link {
-  color: #61dafb;
+.noteViewTitle{
+  width: 95%;
+  margin: 5px auto 10px auto;
+  background-color: gray;
+  height: 40px;
+  line-height: 40px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.noteLineContainer{
+  width: 95%;
+  margin: 5px auto;
+  overflow-y: auto;
+  height: calc(100vh - 100px);
+}
+.noteLine{
+  width: 100%;
+  margin: 3px 0;
+  background-color: gray;
+  transition: 1000ms;
+}
+.noteLine:hover{
+  background-color: rgb(157, 157, 157);
+  transition: 100ms;
+}
+.selectedLine{
+  background-color: rgb(157, 157, 157);
+  transition: 100ms;
+}
+.editButton{
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+}
+.editButton:hover{
+  background-color: rgb(180, 179, 179);
+  box-shadow: 0 0 10px gold;
+}
+.buttonContainer{
+  display: flex;
+  width: 95%;
+  margin-left: 2.5%;  
+  box-sizing: border-box;
+  height: 30px;
+  line-height: 30px;
+}
+.buttonContainer div{
+  flex: 1;
+  background-color: rgb(82, 111, 161);
+  transition: 500ms;
+  cursor: pointer;
+  border-left: 1px solid rgba(91, 90, 90, 0.765);
+}
+.buttonContainer div:hover{
+  background-color: rgb(58, 120, 227);
+  box-shadow: 0 0 10px rgb(82, 111, 161);
+  transition: 100ms;
 }
