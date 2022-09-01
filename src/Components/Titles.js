@@ -1,12 +1,13 @@
 import React from 'react'
-
-function Titles(props) {
-
+import cubefield from '../Images/cubefield.gif'
+function Titles(props) {  
   return (
     <div className='titlesContainer'>
         <div className='titleBox' onClick={(event) => props.editNote(null, event)}>
-          <div className='titleBoxInner'>
-            New Note
+          <div className='titleBoxInner newNoteBox'>
+            <div>
+              New Note
+            </div>
           </div>
         </div>
         {props.noteArray.map(noteData => (

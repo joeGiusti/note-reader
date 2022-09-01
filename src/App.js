@@ -57,6 +57,8 @@ total time:
 
 function App() {
 
+  // Variables, Init, and Setup
+  // #region
   const [page, setPage] = useState("titles")
 
   const [noteData, setNoteData] = useState(null)
@@ -68,21 +70,86 @@ function App() {
     firebaseSetup()
     loadNotes()
   }, [])
-
+  
   function firebaseSetup(){
     var firebaseConfig = {
-        apiKey: "AIzaSyDCrQSCE91lh7GYlr7eTFbX--e1NnvF7Uw",
-        authDomain: "practice-79227.firebaseapp.com",
-        databaseURL: "https://practice-79227-default-rtdb.firebaseio.com",
-        projectId: "practice-79227",
+      apiKey: "AIzaSyDCrQSCE91lh7GYlr7eTFbX--e1NnvF7Uw",
+      authDomain: "practice-79227.firebaseapp.com",
+      databaseURL: "https://practice-79227-default-rtdb.firebaseio.com",
+      projectId: "practice-79227",
         storageBucket: "practice-79227.appspot.com",
         messagingSenderId: "283438782315",
         appId: "1:283438782315:web:d913f1ed9d87b5401a1e2e"     
+      }
+      var app = initializeApp(firebaseConfig)
+      dbRef.current = getDatabase(app)
     }
-    var app = initializeApp(firebaseConfig)
-    dbRef.current = getDatabase(app)
-  }
+    
+    // #endregion
 
+    // Display and Page Change
+    // #region
+    
+    function displayPage(){
+      if(page == "edit")
+          return (        
+            <Edit
+              saveNote={saveNote}
+              deleteNote={deleteNote}
+              noteData={noteData}
+              setPage={setPage}
+            ></Edit>
+          );
+      if(page == "titles")
+        return (        
+          <Titles
+            openNote={openNote}
+            noteArray={noteArray}
+            setPage={setPage}
+            editNote={editNote}
+          ></Titles>
+        );
+      if(page == "view")
+        return (        
+          <View
+            setPage={setPage}
+            noteData={noteData}
+          ></View>
+        );
+    }
+  
+    function openNote(_noteData){
+      
+      if(!_noteData)
+        return
+          
+      setNoteData(_noteData)
+  
+      setPage("view")
+  
+    }
+  
+    function editNote(_noteData, _event){
+  
+      _event.stopPropagation()
+  
+      if(!_noteData)
+        setNoteData({
+          key: null,
+          title: "New Note",
+          content: ""
+        })
+      else
+        setNoteData(_noteData)
+  
+        setPage("edit")
+    }
+  
+    // #endregion
+
+  // Db Interaction
+  // #region
+  
   function loadNotes(){
     onValue(ref(dbRef.current, "noteApp/notes/"), snap => {
       console.log("note load value:")
@@ -101,80 +168,39 @@ function App() {
     })
   }
 
-  function openNote(_noteData){
-    
-    if(!_noteData)
-      return
-        
-    setNoteData(_noteData)
-
-    setPage("view")
-
-  }
-  function editNote(_noteData, _event){
-
-    _event.stopPropagation()
-
-    if(!_noteData)
-      setNoteData({
-        key: null,
-        title: "New Note",
-        content: ""
-      })
-    else
-      setNoteData(_noteData)
-
-      setPage("edit")
-  }
-  
   function saveNote(_noteData){    
-    console.log("saving note in App.js")
-    console.log(_noteData)
+
     if(_noteData.key)
       updateNote(_noteData)
     else
       saveNewNote(_noteData)
+
   }
   function saveNewNote(_noteData){
-    console.log("saving new note")
+    
     var newRef = push(ref(dbRef.current, "noteApp/notes/"))
     set(newRef, _noteData)
+
+    // Put it in state in case user presses save and view
+    var newNoteData = _noteData
+    newNoteData.key = newRef.key
+    setNoteData(newNoteData)
+
   }
   function updateNote(_noteData){
+    
     set(ref(dbRef.current, "noteApp/notes/" + _noteData.key), _noteData)
+
+    // Put it in state in case user presses save and view
+    setNoteData(_noteData)
+
   }
   function deleteNote(_noteData){
     set(ref(dbRef.current, "noteApp/notes/" + _noteData.key), null)
     setPage("titles")
   }
 
-  function displayPage(){
-    if(page == "edit")
-        return (        
-          <Edit
-            saveNote={saveNote}
-            deleteNote={deleteNote}
-            noteData={noteData}
-            setPage={setPage}
-          ></Edit>
-        );
-    if(page == "titles")
-      return (        
-        <Titles
-          openNote={openNote}
-          noteArray={noteArray}
-          setPage={setPage}
-          editNote={editNote}
-        ></Titles>
-      );
-    if(page == "view")
-      return (        
-        <View
-          setPage={setPage}
-          noteData={noteData}
-        ></View>
-      );
-  }
+  // #endregion  
 
   return (
     <div className="App">

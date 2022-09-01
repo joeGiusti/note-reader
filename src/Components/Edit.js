@@ -17,6 +17,17 @@ function Edit(props) {
         props.setPage("titles")
 
     }
+    function saveAndView(){
+
+        // save and close
+        props.saveNote({
+            key: props.noteData.key,
+            title: titleInput.current.value,
+            content: contentInput.current.value,
+        })
+        props.setPage("view")
+
+    }
     function revert(){
         
         titleInput.value = props.noteData.title
@@ -27,13 +38,14 @@ function Edit(props) {
   return (
     <div className='edit'>        
         <input defaultValue={props.noteData.title} ref={titleInput}></input>
-        <textarea defaultValue={props.noteData.content} ref={contentInput}></textarea>
         <div className='buttonContainer'>
-            <div className='button' onClick={() => props.deleteNote(props.noteData)} >Delete</div>
-            <div className='button' onClick={revert}>Revert</div>
-            <div className='button' onClick={() => props.setPage("titles")}>Cancel</div>
-            <div className='button' onClick={saveAndClose}>Save and Close</div>
+            <div onClick={() => props.deleteNote(props.noteData)} >Delete</div>
+            <div onClick={revert}>Revert</div>
+            <div onClick={() => props.setPage("titles")}>Cancel</div>
+            <div onClick={saveAndView}>Save and View</div>
+            <div onClick={saveAndClose}>Save and Close</div>
         </div>
+        <textarea defaultValue={props.noteData.content} ref={contentInput}></textarea>
     </div>
   )
 }

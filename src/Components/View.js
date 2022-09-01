@@ -38,9 +38,11 @@ function View(props) {
         }
         else{
             
-            // Speak the current line
+            // Speak the current line after a pause
             speak(noteArray[lineRef.current]).then(()=>{
-                readNextLine()
+                setTimeout(() => {
+                    readNextLine()
+                }, 2000); 
             })
     
             // Increace the counter
@@ -122,6 +124,7 @@ function View(props) {
             <div className='buttonContainer'>
                 <div onClick={()=>props.setPage("titles")}>Back</div>
                 <div onClick={restart}>Restart</div>
+                <div onClick={()=>props.setPage("edit")}>Edit</div>
                 <div onClick={pause}>Pause</div>
                 <div onClick={readNextLine}>Start</div>
             </div>

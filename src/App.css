@@ -7,6 +7,7 @@
   text-align: center;
   overflow: hidden;
   box-sizing: border-box;
+  padding-top: 20px;
 }
 .titlesContainer{  
   padding-top: 20px;
@@ -21,7 +22,9 @@
   margin: 10px;
   vertical-align: top;
   position: relative;
-  box-shadow: 0 0 5px rgb(54, 54, 54);
+  box-shadow: 0 0 10px rgb(24, 23, 23);
+  border: 1px solid rgb(160, 160, 160);
+  box-sizing: border-box;
 }
 .titleBox:hover{
   background-color: rgb(155, 151, 151);
@@ -34,11 +37,35 @@
   height: 100%;
   width: 100%;
 }
+.newNoteBox{
+  background-image: url('./Images/cubefield.gif');
+  background-size: contain;
+  color: white;
+}
+.newNoteBox div{
+  margin-bottom: 10px;
+  filter: opacity(0);
+  transition: 1000ms;
+  font-size: 2px; 
+}
+.newNoteBox:hover div{
+  margin-bottom: 0px;
+  filter: opacity(1); 
+  font-size: 16px; 
+}
+.titleBoxInner img{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
 .edit{
-  height: 90vh;
+  /* height: 90vh;
   width: 90vw;
   margin: 5vh 5vw;
-  background-color: gray;
+  background-color: gray; */
   position: relative;
   border-radius: 2px;
   box-shadow: 0 0 5px rgb(54, 54, 54);
@@ -58,7 +85,7 @@
 .edit textarea{
   min-width: 96%;
   max-width: 96%;
-  height: calc(97% - 75px);
+  height: calc(100vh - 105px);
   margin: 5px auto;  
   border: none;
   box-sizing: border-box;
@@ -79,11 +106,6 @@
   bottom: 5px;
   left: 2%;
 }
-.button{
-  flex: 1;
-  background-color: rgb(107, 107, 107);
-  cursor: pointer;
-}
 .button:hover{
   background-color: rgb(142, 142, 142);
   box-shadow: 0 0 10px gold;
@@ -102,7 +124,7 @@
   width: 96%;
   margin: 5px auto;
   overflow-y: auto;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 120px);
 }
 .noteLine{
   width: 100%;
@@ -138,7 +160,7 @@
   margin-left: 2%;  
   box-sizing: border-box;
   height: 30px;
-  line-height: 30px;
+  line-height: 30px;  
 }
 .buttonContainer div{
   flex: 1;
